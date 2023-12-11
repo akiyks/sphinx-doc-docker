@@ -4,6 +4,7 @@ ARG sphinx_pkg=python3-Sphinx_4_2_0
 RUN zypper refresh \
  && zypper --non-interactive install --no-recommends \
       $sphinx_pkg \
+      python3-PyYAML \
       perl \
       which \
       make \

@@ -20,8 +20,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --no-cache-dir -U pip
-ARG sphinxrel=6.1.3
-RUN python3 -m pip install --no-cache-dir Sphinx==$sphinxrel Pillow
+ARG sphinxrel=7.2.6
+RUN python3 -m pip install --no-cache-dir Sphinx=$sphinxrel Pillow sphinx_rtd_theme pyyaml
 
 CMD bash
 

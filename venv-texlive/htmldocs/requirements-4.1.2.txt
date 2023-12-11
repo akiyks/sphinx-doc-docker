@@ -1,3 +1,4 @@
-sphinx_rtd_theme
 Sphinx==4.1.2
+sphinx_rtd_theme
+pyyaml
 

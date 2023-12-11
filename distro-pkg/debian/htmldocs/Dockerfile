@@ -21,6 +21,7 @@ RUN apt-get update \
     perl \
     make \
     python3-sphinx \
+    python3-yaml \
     graphviz \
     inkscape \
     fonts-liberation \
