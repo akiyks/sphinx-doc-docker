@@ -1,7 +1,14 @@
+# Note: 3.5 < Sphinx < 4.2 needs python3 < 3.10
 # jinja2>=3.1 is not compatible with Sphinx < 4.0
 jinja2<3.1
 # docutils>=0.18 is not compatible with 3.0 <= Sphinx < 4.0
 docutils<0.18
-Sphinx==3.5.4
+# recent sphinxcontrib packages need Sphinx >=5.0
+sphinxcontrib-applehelp<1.0.5
+sphinxcontrib-devhelp<1.0.3
+sphinxcontrib-htmlhelp<2.0.2
+sphinxcontrib-serializinghtml<1.1.6
+sphinxcontrib-qthelp<1.0.4
 sphinx_rtd_theme
+Sphinx==3.5.4
 pyyaml

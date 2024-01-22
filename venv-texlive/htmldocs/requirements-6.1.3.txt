@@ -1,2 +1,4 @@
-Sphinx==6.1.3
+# Sphinx 6.0 dropped support of python3 3.6 and 3.7
 sphinx_rtd_theme
+Sphinx==6.1.3
+pyyaml
