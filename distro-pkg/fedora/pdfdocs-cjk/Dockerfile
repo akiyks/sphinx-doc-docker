@@ -22,6 +22,8 @@ RUN dnf -y update \
       python3-sphinx-latex \
       latexmk \
       texlive-xetex \
+      texlive-ellipse \
+      texlive-pict2e \
       dejavu-fonts-all \
  && dnf clean all
 
