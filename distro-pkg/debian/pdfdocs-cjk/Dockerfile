@@ -1,7 +1,7 @@
 ARG distro=debian
 ARG tag=stable-slim
 FROM $distro:$tag
-# for pdfdocs (non CJK)
+# for pdfdocs (with CJK)
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y locales \
@@ -43,5 +43,13 @@ RUN apt-get update \
       texlive-latex-extra \
       texlive-xetex \
       tex-common \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# for CJK
+RUN apt-get update \
+ && apt-get install --no-install-recommends -y \
+    texlive-lang-chinese \
+    fonts-noto-cjk \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
