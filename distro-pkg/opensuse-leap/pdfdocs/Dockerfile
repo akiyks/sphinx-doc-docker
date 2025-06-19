@@ -12,7 +12,7 @@ RUN zypper refresh \
       graphviz \
  && zypper clean --all \
  && cd /usr/bin \
-   && ln -s $pythoncmd python3
+   && ln -sf $pythoncmd python3
 
 WORKDIR /linux
 CMD bash
