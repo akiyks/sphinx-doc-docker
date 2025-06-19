@@ -10,7 +10,8 @@ RUN dnf -y update \
       make \
       graphviz \
       perl-base \
-      inkscape \
+      perl-File-Find \
+      librsvg2-tools \
       liberation-sans-fonts \
  && dnf clean all
 
@@ -24,5 +25,9 @@ RUN dnf -y update \
       texlive-xetex \
       texlive-ellipse \
       texlive-pict2e \
+      texlive-fontawesome5 \
       dejavu-fonts-all \
+      inkscape \
  && dnf clean all
+COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
+RUN fc-cache -sf
