@@ -1,5 +1,5 @@
 # For htmldocs
-ARG tag=latest
+ARG tag=9
 FROM almalinux:$tag
 
 RUN dnf -y update \
