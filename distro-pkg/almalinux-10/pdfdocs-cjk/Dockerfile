@@ -44,3 +44,4 @@ RUN dnf -y update \
       texlive-ctex \
       google-noto-sans-cjk-fonts \
  && dnf clean all
+COPY fonts.conf /root/deny-vf/fontconfig/fonts.conf
