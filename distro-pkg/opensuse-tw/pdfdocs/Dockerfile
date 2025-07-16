@@ -1,5 +1,5 @@
 FROM opensuse/tumbleweed:latest
-ARG python=python311
+ARG python=python3
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 # packages for htmldocs (mathjax)
 RUN zypper refresh \
@@ -10,7 +10,6 @@ RUN zypper refresh \
       which \
       make \
       graphviz \
-      rsvg-convert \
  && zypper clean --all
 
 WORKDIR /linux

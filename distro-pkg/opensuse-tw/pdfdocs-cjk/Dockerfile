@@ -1,5 +1,5 @@
 FROM opensuse/tumbleweed:latest
-ARG python=python311
+ARG python=python3
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 # packages for htmldocs (mathjax)
 RUN zypper refresh \
@@ -10,7 +10,6 @@ RUN zypper refresh \
       which \
       make \
       graphviz \
-      rsvg-convert \
  && zypper clean --all
 
 WORKDIR /linux
@@ -38,11 +37,17 @@ RUN zypper refresh \
 # openSUSE tumbleweed has replaced static Noto CJK fonts with variable ones,
 # which are not compatible with xelatex.
 # We need to download static ones from google fonts site.
+# Sans:
+#   https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Bold.ttc
+#   https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Regular.ttc
+# Serif:
+#   https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Bold.ttc
+#   https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Regular.ttc
 RUN cd /opt \
- && curl https://github.com/googlefonts/noto-cjk/raw/main/Sans/SuperOTC/NotoSansCJK.ttc.zip -L -o NotoSansCJK.ttc.zip \
- && curl https://github.com/googlefonts/noto-cjk/releases/download/Serif2.002/01_NotoSerifCJK.ttc.zip -L -o NotoSerifCJK.ttc.zip \
- && unzip NotoSansCJK.ttc.zip \
- && unzip NotoSerifCJK.ttc.zip \
+ && curl https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Bold.ttc -L -O \
+ && curl https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Regular.ttc -L -O \
+ && curl https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Bold.ttc -L -O \
+ && curl https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Regular.ttc -L -O \
  && mkdir /usr/local/share/fonts/ \
  && mv *.ttc /usr/local/share/fonts/ \
  && fc-cache -sf
