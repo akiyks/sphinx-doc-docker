@@ -12,10 +12,7 @@ RUN dnf -y update \
       which \
       make \
       graphviz \
-      perl-base \
-      perl-File-Find \
-      librsvg2-tools \
-      liberation-sans-fonts \
+      perl \
  && dnf clean all
 
 WORKDIR /linux

@@ -12,10 +12,7 @@ RUN dnf -y update \
       which \
       make \
       graphviz \
-      perl-base \
-      perl-File-Find \
-      librsvg2-tools \
-      liberation-sans-fonts \
+      perl \
  && dnf clean all
 
 WORKDIR /linux
@@ -31,7 +28,12 @@ RUN dnf -y update \
       python3-sphinx-latex \
       latexmk \
       texlive-xetex \
+      texlive-ellipse \
+      texlive-pict2e \
+      texlive-fontawesome5 \
       dejavu-fonts-all \
+      librsvg2-tools \
+      liberation-sans-fonts \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
@@ -40,7 +42,6 @@ RUN fc-cache -sf
 
 RUN dnf -y update \
  && dnf install -y --setopt=tsflags=nodocs --setopt=install_weak_deps=False \
-      texlive-xecjk \
       texlive-ctex \
       google-noto-sans-cjk-fonts \
  && dnf clean all
