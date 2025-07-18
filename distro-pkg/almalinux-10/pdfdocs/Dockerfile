@@ -28,9 +28,6 @@ RUN dnf -y update \
       python3-sphinx-latex \
       latexmk \
       texlive-xetex \
-      texlive-ellipse \
-      texlive-pict2e \
-      texlive-fontawesome5 \
       dejavu-fonts-all \
       librsvg2-tools \
       liberation-sans-fonts \
