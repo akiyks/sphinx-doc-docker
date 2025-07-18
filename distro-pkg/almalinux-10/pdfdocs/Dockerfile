@@ -29,8 +29,18 @@ RUN dnf -y update \
       latexmk \
       texlive-xetex \
       dejavu-fonts-all \
-      librsvg2-tools \
       liberation-sans-fonts \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
+
+# Install inkscape from flathub
+RUN dnf -y update \
+ && dnf install -y --setopt=tsflags=nodocs --setopt=install_weak_deps=False \
+      flatpak \
+      flatpak-xdg-utils \
+      librsvg2-tools \
+ && dnf clean all \
+ && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
+ && flatpak install -y flathub org.gnome.Platform/x86_64/48 \
+ && flatpak install -y flathub org.inkscape.Inkscape
