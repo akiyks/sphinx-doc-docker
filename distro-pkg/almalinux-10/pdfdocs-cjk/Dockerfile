@@ -19,6 +19,7 @@ WORKDIR /linux
 CMD bash
 
 # For pdfdocs (non-CJK)
+# EPEL 10 doesn't have Inkscape.  Install rsvg-convert and ImageMagick here.
 
 RUN dnf -y update \
  && dnf install -y epel-release \
@@ -29,8 +30,9 @@ RUN dnf -y update \
       latexmk \
       texlive-xetex \
       dejavu-fonts-all \
-      librsvg2-tools \
       liberation-sans-fonts \
+      librsvg2-tools \
+      ImageMagick \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
@@ -40,6 +42,21 @@ RUN fc-cache -sf
 RUN dnf -y update \
  && dnf install -y --setopt=tsflags=nodocs --setopt=install_weak_deps=False \
       texlive-ctex \
-      google-noto-sans-cjk-fonts \
  && dnf clean all
+
+# We need to download static noto CJK fonts from google fonts site.
+
+RUN cd /opt \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Serif2.003/04_NotoSerifCJKOTC.zip -L -O \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Sans2.004/03_NotoSansCJK-OTC.zip -L -O \
+ && unzip 04_NotoSerifCJKOTC.zip \
+ && rm LICENSE \
+ && unzip 03_NotoSansCJK-OTC.zip \
+ && mkdir /usr/local/share/fonts/ \
+ && mv OTC/NotoSerifCJK-Bold.ttc OTC/NotoSerifCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv NotoSansCJK-Bold.ttc NotoSansCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv LICENSE /usr/local/share/fonts/ \
+ && rm -r * \
+ && fc-cache -f /usr/local/share/fonts
+
 COPY fonts.conf /root/deny-vf/fontconfig/fonts.conf

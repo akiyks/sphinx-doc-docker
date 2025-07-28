@@ -1,2 +1,0 @@
-#! /bin/sh -f
-flatpak run org.inkscape.Inkscape --batch-process $*

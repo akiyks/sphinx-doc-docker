@@ -19,6 +19,7 @@ WORKDIR /linux
 CMD bash
 
 # For pdfdocs (non-CJK)
+# EPEL 10 doesn't have Inkscape.  Install rsvg-convert and ImageMagick here.
 
 RUN dnf -y update \
  && dnf install -y epel-release \
@@ -30,20 +31,8 @@ RUN dnf -y update \
       texlive-xetex \
       dejavu-fonts-all \
       liberation-sans-fonts \
+      librsvg2-tools \
+      ImageMagick \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
-
-# Install inkscape from flathub
-RUN dnf -y update \
- && dnf install -y --setopt=tsflags=nodocs --setopt=install_weak_deps=False \
-      flatpak \
-      flatpak-xdg-utils \
-      librsvg2-tools \
- && dnf clean all \
- && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo \
- && flatpak install -y flathub org.gnome.Platform/x86_64/48 \
- && flatpak install -y flathub org.inkscape.Inkscape
-
-COPY inkscape-sh /usr/local/bin/inkscape
-RUN chmod +x /usr/local/bin/inkscape
