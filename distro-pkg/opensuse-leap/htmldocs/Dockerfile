@@ -15,8 +15,8 @@ RUN zypper refresh \
 RUN if [ "$pythoncmd" = "python3" ] ; then \
       echo "already have python3" \
  ;  else \
-      cd /usr/bin \
- &&   ln -sf $pythoncmd python3 \
+      cd /usr/local/bin \
+ &&   ln -sf /usr/bin/$pythoncmd python3 \
  ;  fi
 WORKDIR /linux
 CMD bash

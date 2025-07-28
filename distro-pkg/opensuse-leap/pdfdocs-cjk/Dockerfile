@@ -49,3 +49,24 @@ COPY inkscape-sh /usr/local/bin/inkscape
 RUN chmod +x /usr/local/bin/inkscape
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
+
+# Additional packages for latexdocs, epubdocs, and pdfdocs (CJK)
+RUN zypper refresh \
+ && zypper --non-interactive install --no-recommends \
+      texlive-xecjk \
+      unzip \
+ && zypper clean --all
+# openSUSE leap does not provide Noto CJK fonts as its distro packages.
+# Download them from google fonts site.
+RUN cd /opt \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Serif2.003/04_NotoSerifCJKOTC.zip -L -O \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Sans2.004/03_NotoSansCJK-OTC.zip -L -O \
+ && unzip 04_NotoSerifCJKOTC.zip \
+ && rm LICENSE \
+ && unzip 03_NotoSansCJK-OTC.zip \
+ && mkdir /usr/local/share/fonts/ \
+ && mv OTC/NotoSerifCJK-Bold.ttc OTC/NotoSerifCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv NotoSansCJK-Bold.ttc NotoSansCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv LICENSE /usr/local/share/fonts/ \
+ && rm -r * \
+ && fc-cache -f /usr/local/share/fonts
