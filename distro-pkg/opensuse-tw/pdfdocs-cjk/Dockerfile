@@ -37,17 +37,15 @@ RUN zypper refresh \
 # openSUSE tumbleweed has replaced static Noto CJK fonts with variable ones,
 # which are not compatible with xelatex.
 # We need to download static ones from google fonts site.
-# Sans:
-#   https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Bold.ttc
-#   https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Regular.ttc
-# Serif:
-#   https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Bold.ttc
-#   https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Regular.ttc
 RUN cd /opt \
- && curl https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Bold.ttc -L -O \
- && curl https://github.com/notofonts/noto-cjk/blob/main/Sans/OTC/NotoSansCJK-Regular.ttc -L -O \
- && curl https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Bold.ttc -L -O \
- && curl https://github.com/notofonts/noto-cjk/blob/main/Serif/OTC/NotoSerifCJK-Regular.ttc -L -O \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Serif2.003/04_NotoSerifCJKOTC.zip -L -O \
+ && curl https://github.com/googlefonts/noto-cjk/releases/download/Sans2.004/03_NotoSansCJK-OTC.zip -L -O \
+ && unzip 04_NotoSerifCJKOTC.zip \
+ && rm LICENSE \
+ && unzip 03_NotoSansCJK-OTC.zip \
  && mkdir /usr/local/share/fonts/ \
- && mv *.ttc /usr/local/share/fonts/ \
- && fc-cache -sf
+ && mv OTC/NotoSerifCJK-Bold.ttc OTC/NotoSerifCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv NotoSansCJK-Bold.ttc NotoSansCJK-Regular.ttc /usr/local/share/fonts/ \
+ && mv LICENSE /usr/local/share/fonts/ \
+ && rm -r * \
+ && fc-cache -f /usr/local/share/fonts
