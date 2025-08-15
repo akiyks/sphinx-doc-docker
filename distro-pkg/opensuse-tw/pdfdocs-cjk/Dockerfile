@@ -26,6 +26,7 @@ RUN zypper refresh \
       inkscape \
       liberation-fonts \
       dejavu-fonts \
+      poppler-tools \
  && zypper clean --all
  
 # packages for pdfdocs w/ CJK

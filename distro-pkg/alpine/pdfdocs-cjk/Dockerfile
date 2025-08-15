@@ -21,7 +21,8 @@ CMD /bin/bash
 # for pdfdocs (w/o CJK)
 RUN apk -U add --no-cache \
       texlive-xetex \
-      texmf-dist-latexextra
+      texmf-dist-latexextra \
+      poppler-utils
 
 # for pdfdocs (w CJK)  --- Doesn't work at the moment (xdvipdfmx crash)
 #RUN apk -U add --no-cache \

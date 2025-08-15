@@ -43,6 +43,7 @@ RUN apt-get update \
       texlive-latex-extra \
       texlive-xetex \
       tex-common \
+      poppler-utils \ 
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 

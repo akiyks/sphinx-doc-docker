@@ -19,6 +19,7 @@ RUN dnf update -y \
       texlive-collection-basic \
       texlive-dist \
       fonts-ttf-dejavu \
+      poppler \
  && dnf clean all
 
 # for pdfdocs (w/ CJK)

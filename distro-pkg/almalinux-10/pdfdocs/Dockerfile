@@ -33,6 +33,7 @@ RUN dnf -y update \
       liberation-sans-fonts \
       librsvg2-tools \
       ImageMagick \
+      poppler-utils \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf

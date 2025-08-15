@@ -63,6 +63,7 @@ RUN dnf install -y epel-release \
       texlive-upquote \
       texlive-wrapfig \
       texlive-xetex \
+      poppler-utils \
  && dnf clean all \
  && ln -sf /usr/bin/python3.11 /etc/alternatives/python3 \
  && mktexfmt xelatex.fmt

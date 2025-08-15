@@ -33,6 +33,7 @@ RUN dnf -y update \
       texlive-xetex \
       dejavu-fonts-all \
       inkscape \
+      poppler-utils \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf

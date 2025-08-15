@@ -31,6 +31,7 @@ RUN zypper refresh \
       texlive-ellipse \
       dejavu-fonts \
       rsvg-convert \
+      poppler-tools \
  && zypper clean --all
 
 # Leap 15.6 has Inkscape 1.0.1.  It is not good enough for some of

@@ -28,6 +28,7 @@ RUN dnf -y update \
       texlive-fontawesome5 \
       dejavu-fonts-all \
       inkscape \
+      poppler-utils \
  && dnf clean all
 COPY 09-texlive-fonts.conf /etc/fonts/conf.d/
 RUN fc-cache -sf
